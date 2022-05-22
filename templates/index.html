@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ant-NLP</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
+</head>
+
+<body>
+
+    <div class="content">
+
+        <div class="navbar">
+            <img src="../static/img/antnlp-logo.svg" alt="Ant-NLP Logo" id="antnlp-logo">
+        </div>
+
+        <div class="upload-img">
+            <div class="dataset-drop-area">
+                <img src="../static/img/upload-icon.svg" alt="Upload Icon" id="upload-icon">
+                <header>Drag & Drop to upload json file</header>
+                <span>OR</span>
+                <button>Browse Files</button>
+                <input type="file" hidden>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{url_for('static', filename='javascript/main.js')}}"></script>
+</body>
+</html>

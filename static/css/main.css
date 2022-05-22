@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;   
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: url(../img/bg.jpeg);    
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+#antnlp-logo {
+    z-index: 100;
+    width: 12vw;
+}
+
+.upload-img {
+    padding-left: 50px;
+    padding-top: 10px;
+}
+
+.dataset-drop-area {
+    border: 2px dashed #643F3F;
+    height: 100px;
+    width: 800px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.dataset-drop-area.active {
+    border: 2px solid #643F3F;
+    background-color: lightcyan;
+}
+
+.dataset-drop-area #upload-icon {
+    width: 3vw;
+}
+
+.dataset-drop-area header {
+    font-size: 20px;
+    font-weight: 500;
+    color: #643F3F;
+}
+
+.dataset-drop-area span {
+    font-size: 20px;
+    font-weight: 500;
+    color: #643F3F;
+}
+
+.dataset-drop-area button {
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background-color: #ffaf96;
+    border: solid 1px #643F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}
