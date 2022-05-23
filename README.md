@@ -33,7 +33,7 @@ python -m flask run
 
 ## Usage 💻
 
-After launching the server, start a web browser and run the localhost address in 2 tabs
+After launching the server, start a web browser and load the page with the address -
 ```
 http://127.0.0.1:5000/
 ```
