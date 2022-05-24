@@ -2,6 +2,37 @@
 Controls the home page
 */
 
+
+/*
+The init function first sends an ajax request to the backend to fetch the dataset
+If the dataset is found, then it is loaded in the dataset-display div. The user cannot upload their file if this happens, until the previous dataset is deleted.
+If it is not found, it waits for the user to upload a file, and then loads it.
+*/
+function init() {
+    fetchDB();
+}
+
+// Fetches the dataset from local storage (if it exists)
+function fetchDB() {
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/fetch-dataset", true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xml.onload = function() {
+        var dataReply = JSON.parse(this.responseText);
+
+        // if the local database was not empty, then load it at the frontend
+        if(dataReply) {
+            data = JSON.parse(JSON.stringify(dataReply));  // deep copy of the dataset
+            updateDatasetDisplay();
+        }
+    };
+    xml.send(JSON.stringify({}));
+}
+
+
+init();
+
 // The dataset drop area is the part of the page where the user can drop a json file to upload it (or click on the icon/upload button to upload the file)
 const datasetDropArea = document.querySelector('.dataset-drop-area');
 
@@ -10,8 +41,11 @@ const datasetUploadButton = datasetDropArea.querySelector('button');        // c
 const datasetUploadIcon   = datasetDropArea.querySelector('#upload-icon');  // controls the upload icon
 const datasetUploadInput  = datasetDropArea.querySelector('input');         // controls the file input button (which is hidden)
 
+const datasetDeleteButton = document.querySelector('.div-delete-dataset button');
+
 var file;
 var data; // object that holds the dataset
+
 
 // the next 2 onclicks check if the user clicks on the upload button or the upload icon, and then trigger the input tag
 datasetUploadButton.onclick = () => {
@@ -26,10 +60,13 @@ datasetUploadIcon.onclick = () => {
 datasetUploadInput.addEventListener("change", (event) => {
     let dt = event.dataTransfer || (event.originalEvent && event.originalEvent.dataTransfer);
     let files = event.target.files || (dt && dt.files);
-    file = files[0];
 
-    processDataset();
-
+    // if no file has been uploaded, then trigger the input tag
+    if(!file) {
+        file = files[0];
+        processDataset();
+    }
+    
     // the class 'active' is used to manipulate the drop area's css
     datasetDropArea.classList.add("active");
 });
@@ -56,13 +93,51 @@ datasetDropArea.addEventListener('drop', (event) => {
     console.log("File has been dropped in da");
 
     // fetching the first file dropped
-    file = event.dataTransfer.files[0];
-    processDataset();
+    if(!file) {
+        file = event.dataTransfer.files[0];
+        processDataset();
+    }
 });
+
+datasetDeleteButton.onclick = () => {
+    deleteDB();
+    console.log("REC");
+    file = null;
+    data = {};
+}
+
+// delete the database at the backend
+function deleteDB() {
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/delete-dataset", true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xml.onload = function() {
+        var dataReply = JSON.parse(this.responseText);
+        data = {} 
+        updateDatasetDisplay();
+    };
+    xml.send(JSON.stringify({}));
+}
+
+// sends the current databse to the backend. Will overwrite the current database at the backend
+function sendDB() {
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/send-dataset", true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xml.onload = function() {
+        var dataReply = JSON.parse(this.responseText);
+        if(dataReply['status'] !== 'success') {
+            console.log("Error at sendDB");
+        }
+    };
+
+    xml.send(JSON.stringify(data));
+}
 
 function processDataset() {
     let fileType = file.type;
-    console.log(fileType);
 
     if (fileType !== "application/json") {
         alert("Please upload a JSON file!");
@@ -72,9 +147,10 @@ function processDataset() {
     fileReader.onload = () => {
         data = fileReader.result;
         data = JSON.parse(data);
-        console.log(data);
-        console.log(typeof (data));
+        // console.log(data);
+        // console.log(typeof (data));
         updateDatasetDisplay();
+        sendDB();
     }
 
     fileReader.readAsText(file);
@@ -83,6 +159,10 @@ function processDataset() {
 // updates the display div with the word problems in the json file. Each card is a word problem that can be clicked on to access the word problem's annotation page
 function updateDatasetDisplay() {
     let datasetDisplayDiv = document.querySelector('.dataset-display');
+
+    // remove all child nodes of the dataset-display div
+    datasetDisplayDiv.textContent = '';
+
     let size = Object.keys(data).length;
 
     for(let i = 0; i < size; i++) {
