@@ -49,24 +49,26 @@ var data; // object that holds the dataset
 
 // the next 2 onclicks check if the user clicks on the upload button or the upload icon, and then trigger the input tag
 datasetUploadButton.onclick = () => {
-    datasetUploadInput.click();
+    // Allow the user to upload a json file only if the existing data object is empty
+    if(Object.keys(data).length === 0) {
+        datasetUploadInput.click();
+    }
+    
 }
 
 datasetUploadIcon.onclick = () => {
-    datasetUploadInput.click();
+    if(Object.keys(data).length === 0) {
+        datasetUploadInput.click();
+    }
 }
 
 // if the input tag is triggered, store the uploaded file in the file variable, and log the json data. (later, trigger a function that display the datapoints from the dataset in a list like fashion with cards (like a blog list))
 datasetUploadInput.addEventListener("change", (event) => {
     let dt = event.dataTransfer || (event.originalEvent && event.originalEvent.dataTransfer);
     let files = event.target.files || (dt && dt.files);
-
-    // if no file has been uploaded, then trigger the input tag
-    if(!file) {
-        file = files[0];
-        processDataset();
-    }
-    
+    file = files[0];
+    processDataset();
+        
     // the class 'active' is used to manipulate the drop area's css
     datasetDropArea.classList.add("active");
 });
@@ -145,12 +147,14 @@ function processDataset() {
 
     let fileReader = new FileReader();
     fileReader.onload = () => {
-        data = fileReader.result;
-        data = JSON.parse(data);
-        // console.log(data);
-        // console.log(typeof (data));
-        updateDatasetDisplay();
-        sendDB();
+        if(Object.keys(data).length === 0) {
+            data = fileReader.result;
+            data = JSON.parse(data);
+            // console.log(data);
+            // console.log(typeof (data));
+            updateDatasetDisplay();
+            sendDB();
+        }
     }
 
     fileReader.readAsText(file);

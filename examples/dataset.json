@@ -3,9 +3,20 @@
         "word_problem": "There are 4.0 walnut trees currently in the park. Park workers will plant 6.0 walnut trees today. How many walnut trees will the park have when the workers are finished?",
         "answer": 10
     },
-
     "2": {
         "word_problem": "Dan found 56.0 seashells on the beach. He gave Jessica some of his seashells. He has 22.0 seashells left. How many seashells did he give to Jessica?",
         "answer": 34
+    },
+    "3": {
+        "word_problem": "Lansing has 25.0 elementary schools. There are 247.0 students in each school. How many elementary students are there altogether in Lansing?",
+        "answer": 6175
+    },
+    "4": {
+        "word_problem": "There are 6.0 red balls and 8.0 yellow balls. Each red ball is worth 6.0 points. The points value for yellow balls is 18.0 points per yellow ball. How many points are earned with these balls?",
+        "answer": 180
+    },
+    "5": {
+        "word_problem": "Marcus has 210.0 baseball cards. He has 58.0 more than Carter. How many baseball cards does Carter have?",
+        "answer": 152
     }
 }
