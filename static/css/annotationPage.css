@@ -1,0 +1,11 @@
+/* Controls the CSS of the annotation page */
+
+* {
+    margin: 0;
+    padding: 0;   
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: url(../img/bg.jpeg);
+}

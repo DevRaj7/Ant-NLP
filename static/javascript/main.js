@@ -12,25 +12,6 @@ function init() {
     fetchDB();
 }
 
-// Fetches the dataset from local storage (if it exists)
-function fetchDB() {
-    var xml = new XMLHttpRequest();
-    xml.open("POST", "/fetch-dataset", true);
-    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    xml.onload = function() {
-        var dataReply = JSON.parse(this.responseText);
-
-        // if the local database was not empty, then load it at the frontend
-        if(dataReply) {
-            data = JSON.parse(JSON.stringify(dataReply));  // deep copy of the dataset
-            updateDatasetDisplay();
-        }
-    };
-    xml.send(JSON.stringify({}));
-}
-
-
 init();
 
 // The dataset drop area is the part of the page where the user can drop a json file to upload it (or click on the icon/upload button to upload the file)
@@ -108,6 +89,24 @@ datasetDeleteButton.onclick = () => {
     data = {};
 }
 
+// Fetches the dataset from local storage (if it exists)
+function fetchDB() {
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/fetch-dataset", true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xml.onload = function() {
+        var dataReply = JSON.parse(this.responseText);
+
+        // if the local database was not empty, then load it at the frontend
+        if(dataReply) {
+            data = JSON.parse(JSON.stringify(dataReply));  // deep copy of the dataset
+            updateDatasetDisplay();
+        }
+    };
+    xml.send(JSON.stringify({}));
+}
+
 // delete the database at the backend
 function deleteDB() {
     var xml = new XMLHttpRequest();
@@ -180,11 +179,26 @@ function updateDatasetDisplay() {
         datapointCard.setAttribute('id', 'datapoint-card-' + (i+1).toString());
         datapointCard.innerHTML = (i+1).toString() + ') ' + wordProblem;
 
-        // wrap the div around an anchor tag to make it clickable
-        // redirect the user to the annotation page of that word problem once clicked
-        let anchorTag = document.createElement('a');
-        anchorTag.href = 'problem-' + (i+1).toString();
-        anchorTag.appendChild(datapointCard);
-        datasetDisplayDiv.appendChild(anchorTag);
+        datapointCard.onclick = () => {
+            var xml = new XMLHttpRequest();
+            xml.open("POST", "/redirect-to-annotation-page", true);
+            xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xml.onload = function() {
+                var dataReply = JSON.parse(this.responseText);
+                if(dataReply['status'] !== 'success') {
+                    console.log("Error at datapointCard.onclick");
+                }
+                window.open('/annotation-page', '_self');
+            };
+
+            console.log({'problemNumber': i+1});
+            let TMP = {'problemNumber': i+1};
+
+            // send the problem number to the backend
+            xml.send(JSON.stringify(TMP));
+
+        }
+        datasetDisplayDiv.appendChild(datapointCard);
     }
 }
