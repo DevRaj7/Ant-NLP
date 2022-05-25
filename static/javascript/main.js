@@ -34,7 +34,6 @@ datasetUploadButton.onclick = () => {
     if(Object.keys(data).length === 0) {
         datasetUploadInput.click();
     }
-    
 }
 
 datasetUploadIcon.onclick = () => {

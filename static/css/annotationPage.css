@@ -9,3 +9,67 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     background: url(../img/bg.jpeg);
 }
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+#antnlp-logo {
+    z-index: 100;
+    width: 10vw;
+}
+
+.word-problem-display {
+    margin: 10px;
+    border: 2px solid #643F3F;
+    height: 80px;
+    width: 800px;
+    border-radius: 5px;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: space-evenly; */
+    flex-direction: row;
+    overflow: scroll;
+    background-color: rgb(188, 210, 210);   
+}
+
+#p-word-problem-display {
+    padding: 5px;
+}
+
+
+.div-home-redirect {
+    width: 100px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.div-home-redirect button {
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #a9f868;
+    border: solid 1px #643F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.annotation-display {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 400px;
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    border: solid 2px #643F3F;
+    border-radius: 5px;
+    background-color: #dac8c8;
+}
+

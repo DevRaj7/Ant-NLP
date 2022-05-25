@@ -10,8 +10,27 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/annotationPage.css') }}">
 </head>
 <body>
+    <!-- Keeps track of the word problem number -->
+    <p id="p-problem-number" hidden>{{problemNumber}}</p>
 
-    <p>{{problemNumber}}</p>
+    <div class="content">
+
+        <div class="navbar">
+            <img src="../static/img/antnlp-logo.svg" alt="Ant-NLP Logo" id="antnlp-logo">
+        </div>
+
+        <div class="word-problem-display">
+            <p id="p-word-problem-display"></p>
+        </div>
+
+        <div class="div-home-redirect">
+            <button>Home Page</button>
+        </div>
+        
+    </div>
+
+    <div class="annotation-display">
+    </div>
     
     <script src="{{url_for('static', filename='javascript/annotationPage.js')}}"></script>
 </body>
