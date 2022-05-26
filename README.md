@@ -50,9 +50,19 @@ Then install the required packages using the specified requirements.txt file
 pip install -r requirements.txt
 ```
 
+Install the required npm packages
+```
+npm install
+```
+
 To launch the server and run the project,
 ```
 python -m flask run
+```
+
+If any changes are made to files using vis-network, make sure to re-build using the npm 'build' script
+```
+npm run build
 ```
 
 ## Usage 💻

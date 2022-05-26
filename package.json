@@ -1,0 +1,38 @@
+{
+  "name": "ant-nlp",
+  "version": "1.0.0",
+  "description": "Annotation tool for text, that uses a graph data structure based approach.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chasmiccoder/Ant-NLP.git"
+  },
+  "keywords": [
+    "nlp",
+    "annotation",
+    "graphs",
+    "visualizer",
+    "text"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chasmiccoder/Ant-NLP/issues"
+  },
+  "homepage": "https://github.com/Chasmiccoder/Ant-NLP#readme",
+  "dependencies": {
+    "vis-data": "^7.1.4",
+    "vis-network": "^9.1.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  }
+}
