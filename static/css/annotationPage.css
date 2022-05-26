@@ -73,3 +73,14 @@ body {
     background-color: #dac8c8;
 }
 
+.div-graph-canvas {
+}
+
+#mynetwork {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    height: 400px;
+    border: solid 1px #643F3F;
+}
+

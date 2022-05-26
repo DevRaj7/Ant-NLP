@@ -2,17 +2,22 @@
 Controls the annotation page
 */
 
+
 import { DataSet } from "vis-data/peer";
 import { Network } from "vis-network/peer";
 
-// TEST vis-network
-// create an array with nodes
+
+/*     Graph Canvas Section     */
+
 const nodes = new DataSet([
-    { id: 1, label: "Node 1" },
+    {
+        id: 1, label: "Node 1",
+        shape: 'star'
+    },
     { id: 2, label: "Node 2" },
     { id: 3, label: "Node 3" },
     { id: 4, label: "Node 4" },
-    { id: 5, label: "Node 5" }
+    { id: 5, label: "Node 5" }  
 ]);
 console.log('here 1');
 
@@ -34,7 +39,7 @@ const data2 = {
 const options = {};
 const network = new Network(container, data2, options);
 
-
+/*     Annotation Page logic     */
 var data;
 let problemNumber = parseInt(document.getElementById('p-problem-number').innerHTML);
 let wordProblemDescription = document.getElementById('p-word-problem-display');
