@@ -84,3 +84,19 @@ body {
     border: solid 1px #643F3F;
 }
 
+.div-add-node {
+    width: 80px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.div-add-node button {
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #a9f868;
+    border: solid 1px #643F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}

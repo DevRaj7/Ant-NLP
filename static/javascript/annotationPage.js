@@ -6,43 +6,69 @@ Controls the annotation page
 import { DataSet } from "vis-data/peer";
 import { Network } from "vis-network/peer";
 
-
 /*     Graph Canvas Section     */
 
+/*
 const nodes = new DataSet([
     {
-        id: 1, label: "Node 1",
-        shape: 'star'
+        id: 1, 
+        label: 'Node 1',
+        shape: 'box'
     },
-    { id: 2, label: "Node 2" },
-    { id: 3, label: "Node 3" },
-    { id: 4, label: "Node 4" },
-    { id: 5, label: "Node 5" }  
+    {
+        id: 2, 
+        label: 'Node 2',
+        shape: 'box'
+    },
+    {
+        id: 3, 
+        label: 'Node 3',
+        shape: 'box'
+    },
+    {
+        id: 4, label: 'Node 4'
+    },
+    {
+        id: 5, label: 'Node 5'
+    }
 ]);
-console.log('here 1');
 
-// create an array with edges
 const edges = new DataSet([
-    { from: 1, to: 3 },
-    { from: 1, to: 2 },
+    // { from: 1, to: 3 },
+    // { from: 1, to: 2 },
     { from: 2, to: 4 },
     { from: 2, to: 5 },
     { from: 3, to: 3 }
 ]);
 
-// create a network
+
 const container = document.getElementById("mynetwork");
 const data2 = {
     nodes: nodes,
     edges: edges
 };
-const options = {};
-const network = new Network(container, data2, options);
+*/
+
+var nodes = new DataSet([]);
+var edges = new DataSet([]);
+const container = document.getElementById("mynetwork");
+
+var graphData = {
+    nodes: nodes,
+    edges: edges
+};
+
+var options = {};
+var numberOfNodes = 0;
+/* initialize the graph */
+const network = new Network(container, graphData, options);
+
 
 /*     Annotation Page logic     */
 var data;
 let problemNumber = parseInt(document.getElementById('p-problem-number').innerHTML);
 let wordProblemDescription = document.getElementById('p-word-problem-display');
+
 
 function init() {
     // Fetches the dataset from local storage (if it exists)
@@ -64,6 +90,16 @@ function init() {
         }
     };
     xml.send(JSON.stringify({}));
+
+    
+}
+
+function graphAddNode() {
+    numberOfNodes++;
+    nodes.add({
+        id: numberOfNodes,
+        label: 'Node ' + numberOfNodes.toString()
+    });
 }
 
 init();
@@ -73,3 +109,11 @@ const homeRedirectButton = document.querySelector('.div-home-redirect button');
 homeRedirectButton.onclick = () => {
     window.open('/', '_self');
 }
+
+const addNodeButton = document.querySelector('.div-add-node button');
+
+addNodeButton.onclick = () => {
+    graphAddNode();
+}
+
+
