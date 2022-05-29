@@ -49,26 +49,33 @@ const data2 = {
 };
 */
 
+
+/* initialize the graph */
 var nodes = new DataSet([]);
 var edges = new DataSet([]);
+const nodeMargin = 10;
 const container = document.getElementById("mynetwork");
 
 var graphData = {
     nodes: nodes,
-    edges: edges
+    edges: edges,
 };
 
-var options = {};
+var options = {
+    manipulation: {
+        editNode: (data, callback) => {
+            console.log("Front thi func");
+            editNode(data, cancelNodeEdit, callback);
+        }
+    }
+};
 var numberOfNodes = 0;
-/* initialize the graph */
 const network = new Network(container, graphData, options);
-
 
 /*     Annotation Page logic     */
 var data;
 let problemNumber = parseInt(document.getElementById('p-problem-number').innerHTML);
 let wordProblemDescription = document.getElementById('p-word-problem-display');
-
 
 function init() {
     // Fetches the dataset from local storage (if it exists)
@@ -90,17 +97,66 @@ function init() {
         }
     };
     xml.send(JSON.stringify({}));
-
-    
 }
 
 function graphAddNode() {
     numberOfNodes++;
+    var labelTemplate = `State: S${numberOfNodes}\nEntity: 'walnut tree'\nNumber: 4\nUnit: ''\nAttribute: ''\nReference: null`;
+
     nodes.add({
         id: numberOfNodes,
-        label: 'Node ' + numberOfNodes.toString()
+        // label: 'Node ' + numberOfNodes.toString(),
+        label: labelTemplate,
+        shape: 'box',
+        margin: nodeMargin,
+        x: -500 + ((numberOfNodes - 1) * nodeMargin),
+        y: -120
     });
 }
+
+function editNode(data, cancelAction, callback) {
+    // document.getElementById("node-label-statename").value = data.label;
+    document.getElementById("node-saveButton").onclick = saveNodeData.bind(
+        this,
+        data,
+        callback
+    );
+    document.getElementById("node-cancelButton").onclick =
+        cancelAction.bind(this, callback);
+    document.getElementById("node-popUp").style.display = "block";
+}
+
+function cancelNodeEdit(callback) {
+    clearNodePopUp();
+    callback(null);
+}
+
+function clearNodePopUp() {
+    document.getElementById("node-saveButton").onclick = null;
+    document.getElementById("node-cancelButton").onclick = null;
+    document.getElementById("node-popUp").style.display = "none";
+}
+
+function saveNodeData(data, callback) {
+    // data.label = document.getElementById("node-label").value;
+    const statename = document.getElementById("node-label-statename").value;
+    const entity = document.getElementById("node-label-entity").value;
+    const number = document.getElementById("node-label-number").value;
+    const unit = document.getElementById("node-label-unit").value;
+    const attribute = document.getElementById("node-label-attribute").value;
+    const reference = document.getElementById("node-label-reference").value;
+
+    data.label = `State: ${statename}\nEntity: '${entity}'\nNumber: ${number}\nUnit: '${unit}'\nAttribute: '${attribute}'\nReference: ${reference}`;
+    
+    clearNodePopUp();
+    callback(data);
+}
+
+network.on("doubleClick", () => {
+    console.log("Double ckicled");
+    network.editNode();
+});
+
 
 init();
 
@@ -115,5 +171,3 @@ const addNodeButton = document.querySelector('.div-add-node button');
 addNodeButton.onclick = () => {
     graphAddNode();
 }
-
-

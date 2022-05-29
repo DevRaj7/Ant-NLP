@@ -27,7 +27,6 @@
             <button>Home Page</button>
         </div>
         
-        <!-- <div id="mynetwork">N/A</div> -->
     </div>
 
     <div class="div-graph-canvas">
@@ -37,6 +36,38 @@
     <div class="div-add-node">
         <button>Add Node</button>
     </div>
+
+    <div id="node-popUp">
+        <span id="node-operation">node</span> <br />
+        <table style="margin: auto">
+          <tr>
+              <td>State</td>
+              <td><input id="node-label-statename" value="" /></td>
+          </tr>
+          <tr>
+            <td>Entity</td>
+            <td><input id="node-label-entity" value="" /></td>
+          </tr>
+          <tr>
+              <td>Number</td>
+              <td><input id="node-label-number" value="" /></td>
+          </tr>
+          <tr>
+              <td>Unit</td>
+              <td><input id="node-label-unit" value="" /></td>
+          </tr>
+          <tr>
+              <td>Attribute</td>
+              <td><input id="node-label-attribute" value="" /></td>
+          </tr>
+          <tr>
+              <td>Reference</td>
+              <td><input id="node-label-reference" value="" /></td>
+          </tr>
+        </table>
+        <input type="button" value="save" id="node-saveButton" />
+        <input type="button" value="cancel" id="node-cancelButton" />
+      </div>
         
     <script src="{{url_for('static', filename='dist/annotationPage.js')}}"></script>
 </body>

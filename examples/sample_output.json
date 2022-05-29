@@ -1,0 +1,54 @@
+{
+    "graph": {
+        "id": "1",
+        "metadata": {
+            "comments": "insert comments specific to problem here"
+        },
+        "nodes": {
+            "s1": {
+                "label": "park",
+                "metadata": {
+                    "entity": "walnut tree",
+                    "number": "4",
+                    "text span": "There are 4.0 walnut trees currently in the park."
+                }
+            },
+            "s2": {
+                "label": "park",
+                "metadata": {
+                    "entity": "walnut tree",
+                    "number": "e2",
+                    "text span": ""
+                }
+            },
+            "s3": {
+                "label": "park",
+                "metadata": {
+                    "entity": "walnut tree",
+                    "number": "10",
+                    "text span": "How many walnut trees will the park have when the workers are finished?",
+                    "reference": "e2"
+                }
+            }
+        },
+        "edges": [
+            {
+                "source": "s1",
+                "target": "s2",
+                "relation": "transfer",
+                "metadata": {
+                    "text span": "Park workers will plant 6.0 walnut trees today.",
+                    "arg0": "6",
+                    "arg1": "walnut tree",
+                    "arg2": "park",
+                    "arg3": "UNK"
+                }
+            },
+            {
+                "source": "s2",
+                "target": "s3",
+                "relation": "None"
+            }
+        ]
+    }
+}
