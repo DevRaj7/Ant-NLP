@@ -8,6 +8,7 @@
     <title>Ant-NLP</title>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
 </head>
 
@@ -24,13 +25,18 @@
                 <img src="../static/img/upload-icon.svg" alt="Upload Icon" id="upload-icon">
                 <header>Drag & Drop to upload json file</header>
                 <span>OR</span>
-                <button>Browse Files</button>
+                <button class="button-browse-pushable" role="button"><span class="button-browse-shadow"></span><span class="button-browse-edge"></span><span class="button-browse-front text">Browse Files</span></button>
                 <input type="file" hidden>
             </div>
         </div>
 
         <div class="div-delete-dataset">
-            <button>Delete Dataset</button>
+            <button class="button-dlt" type="button">
+                <div class="label">
+                  <span class="hover-effect"></span>
+                  <span class="label-text">Delete Set &nbsp;<i class="fa fa-trash"></i></span>
+                </div>
+              </button>
         </div>
         
     </div>

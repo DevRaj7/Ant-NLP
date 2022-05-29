@@ -31,7 +31,7 @@ body {
 .dataset-drop-area {
     border: 2px dashed #643F3F;
     height: 80px;
-    width: 800px;
+    width: 700px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -59,8 +59,223 @@ body {
     font-weight: 500;
     color: #643F3F;
 }
-
-.dataset-drop-area button {
+.button-browse-pushable {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-browse-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+  }
+  
+  .button-browse-edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+      to left,
+      hsl(340deg 100% 16%) 0%,
+      hsl(340deg 100% 32%) 8%,
+      hsl(340deg 100% 32%) 92%,
+      hsl(340deg 100% 16%) 100%
+    );
+  }
+  
+  .button-browse-front {
+    display: block;
+    position: relative;
+    padding: 12px 27px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+  }
+  .text{
+      color:white;
+  }
+  
+  @media (min-width: 768px) {
+    .button-browse-front {
+      font-size: 1.25rem;
+      padding: 12px 42px;
+    }
+  }
+  
+  .button-browse-pushable:hover {
+    filter: brightness(110%);
+  }
+  
+  .button-browse-pushable:hover .button-browse-front {
+    transform: translateY(-6px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+  }
+  
+  .button-browse-pushable:active .button-browse-front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+  
+  .button-browse-pushable:hover .button-browse-shadow {
+    transform: translateY(4px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+  }
+  
+  .button-browse-pushable:active .button-browse-shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+  
+  .button-browse-pushable:focus:not(:focus-visible) {
+    outline: none;
+  }
+  .button-dlt {
+    font-family: "DIN Next LT Pro Bold";
+    font-weight: 300;
+    margin-bottom: 3rem;
+    position: relative;
+    font-size: 1.5rem;
+    padding: 0.7rem;
+    border: 0;
+    text-transform: uppercase;
+    background-color: transparent;
+    cursor: pointer;
+    color: #212121;
+  }
+  
+  .button-dlt:hover {
+    color: #f0cd90;
+    background-color: transparent;
+  }
+  
+  .button-dlt::before,
+  .button-dlt::after {
+    background-color: transparent;
+    content: "";
+    display: block;
+    position: absolute;
+    height: calc(50% - 0.4rem);
+    width: 100%;
+    border: 1px solid #212121;
+    left: 0;
+  }
+  
+  .button-dlt::before {
+    border-bottom: 0;
+    top: 0;
+  }
+  
+  .button-dlt::after {
+    border-top: 0;
+    bottom: 0;
+  }
+  
+  .label {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  .label:before {
+    content: "";
+    height: 100%;
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+  }
+  .label:after {
+    content: "";
+    height: 100%;
+    display: block;
+    position: absolute;
+    width: 100%;
+    right: 0;
+    top: 0;
+  }
+  .hover-effect {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 120%;
+    top: 0;
+    left: -5%;
+    z-index: 1;
+    background-color: #ff4655;
+    transform: translateX(-100%) skew(-10deg);
+    transition: -webkit-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+  }
+  
+  .button-dlt:hover .hover-effect {
+    transform: translateX(0) skew(-10deg);
+  }
+  
+  .label-text {
+    position: relative;
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    z-index: 1;
+  }
+  
+  .label-text:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 0.6rem;
+    width: 0.6rem;
+    right: 0;
+    bottom: 0;
+    background-color: #0f1923;;
+    transition: background-color 0.2s ease-in;
+  }
+  .button-dlt:hover .label-text:after {
+    background-color: #ece8e1;
+  }
+  
+  .button-dlt .label::before,
+  .button-dlt .label::after {
+    border: 1px solid #212121;
+  }
+  
+/* .dataset-drop-area button {
     padding: 10px 25px;
     font-size: 20px;
     font-weight: 500;
@@ -70,28 +285,21 @@ body {
     border: solid 1px #643F3F;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 
 .div-delete-dataset {
-    width: 100px;
-    height: 84px;
+    width: 210px;
+    height: 80px;
     display: flex;
     align-items: center;
+    text-align: center;
     margin-top: 10px;
 }
-
-.div-delete-dataset button {
-    padding: 10px 25px;
-    font-size: 15px;
-    background-color: #ffaf96;
-    border: solid 1px #643F3F;
-    border-radius: 5px;
-    cursor: pointer;
+.div-delete-dataset button{
+    margin:10px;
 }
 
-.div-delete-dataset button:hover {
-    background-color: #fc6b6b;
-}
+
 
 .dataset-display {
     margin-top: 5px;
