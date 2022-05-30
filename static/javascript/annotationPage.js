@@ -67,8 +67,29 @@ var options = {
             console.log("Front thi func");
             editNode(data, cancelNodeEdit, callback);
         }
+    },
+    physics: {
+        enabled: false,
+        // barnesHut: {
+        //     // theta: 0.5,
+        //     gravitationalConstant: -500,
+        //     centralGravity: 0.3,
+        //     springLength: 95,
+        //     springConstant: 0.04,
+        //     damping: 0.20,
+        //     avoidOverlap: 0
+        // },
+        // hierarchicalRepulsion: {
+        //     centralGravity: 0.0,
+        //     springLength: 100,
+        //     springConstant: 0.01,
+        //     nodeDistance: 120,
+        //     damping: 0.09,
+        //     avoidOverlap: 0
+        // },
     }
 };
+
 var numberOfNodes = 0;
 const network = new Network(container, graphData, options);
 
@@ -147,7 +168,7 @@ function saveNodeData(data, callback) {
     const reference = document.getElementById("node-label-reference").value;
 
     data.label = `State: ${statename}\nEntity: '${entity}'\nNumber: ${number}\nUnit: '${unit}'\nAttribute: '${attribute}'\nReference: ${reference}`;
-    
+
     clearNodePopUp();
     callback(data);
 }

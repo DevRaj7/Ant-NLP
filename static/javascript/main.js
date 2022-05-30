@@ -48,7 +48,7 @@ datasetUploadInput.addEventListener("change", (event) => {
     let files = event.target.files || (dt && dt.files);
     file = files[0];
     processDataset();
-        
+
     // the class 'active' is used to manipulate the drop area's css
     datasetDropArea.classList.add("active");
 });
