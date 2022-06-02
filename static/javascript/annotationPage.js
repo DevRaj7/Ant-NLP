@@ -70,15 +70,15 @@ var options = {
     },
     physics: {
         enabled: false,
-        barnesHut: {
-            // theta: 0.5,
-            gravitationalConstant: -500,
-            centralGravity: 0.3,
-            springLength: 95,
-            springConstant: 0.04,
-            damping: 0.20,
-            avoidOverlap: 0
-        },
+        // barnesHut: {
+        //     // theta: 0.5,
+        //     gravitationalConstant: -500,
+        //     centralGravity: 0.3,
+        //     springLength: 95,
+        //     springConstant: 0.04,
+        //     damping: 0.20,
+        //     avoidOverlap: 0
+        // },
         // hierarchicalRepulsion: {
         //     centralGravity: 0.0,
         //     springLength: 100,
@@ -92,6 +92,10 @@ var options = {
 
 var numberOfNodes = 0;
 const network = new Network(container, graphData, options);
+
+/* Local Graph Instance  */
+// This is basically a copy of the current word problem's graph. Any change made is first applied to the local graph instance, and then reflected on the vis-network (visual) graph
+
 
 /*     Annotation Page logic     */
 var data;
