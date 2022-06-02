@@ -174,7 +174,7 @@ function saveNodeData(data, callback) {
 }
 
 network.on("doubleClick", () => {
-    console.log("Double ckicled");
+    console.log("Double clicked");
     network.editNode();
 });
 
