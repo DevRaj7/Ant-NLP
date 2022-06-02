@@ -70,15 +70,15 @@ var options = {
     },
     physics: {
         enabled: false,
-        // barnesHut: {
-        //     // theta: 0.5,
-        //     gravitationalConstant: -500,
-        //     centralGravity: 0.3,
-        //     springLength: 95,
-        //     springConstant: 0.04,
-        //     damping: 0.20,
-        //     avoidOverlap: 0
-        // },
+        barnesHut: {
+            // theta: 0.5,
+            gravitationalConstant: -500,
+            centralGravity: 0.3,
+            springLength: 95,
+            springConstant: 0.04,
+            damping: 0.20,
+            avoidOverlap: 0
+        },
         // hierarchicalRepulsion: {
         //     centralGravity: 0.0,
         //     springLength: 100,
