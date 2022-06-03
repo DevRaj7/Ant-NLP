@@ -65,11 +65,21 @@ If any changes are made to files using vis-network, make sure to re-build using 
 npm run build
 ```
 
+## Docker Installation [Beta] 🐳
+
+```
+sudo systemctl start docker
+docker build -t antnlp:latest .
+docker run -it -d -p 5000:5000 antnlp
+```
+
+Make sure that the annotation page has been built using `npm run build` before running `docker build`.
+
+
 ## Usage 💻
 
 After launching the server, start a web browser and load the page with either of the below addresses -
 ```
-http://127.0.0.1:5000/
 http://localhost:5000/
 ```
 
