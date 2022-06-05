@@ -41,7 +41,6 @@ body {
     padding: 5px;
 }
 
-
 .div-home-redirect {
     width: 100px;
     height: 84px;
@@ -83,25 +82,9 @@ body {
     border: solid 1px #643F3F;
 }
 
-.div-add-node {
-    margin-top: 10px;
-    margin-left: 40px;
-    width: 80px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}
-
-.div-add-node button {
-    padding: 10px 25px;
-    font-size: 15px;
-    background-color: #a9f868;
-    border: solid 1px #643F3F;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 /* To edit node */
+
 #node-popUp {
     display: none;
     position: absolute;
@@ -118,3 +101,60 @@ body {
     text-align: center;
 }
 
+
+/* prev and next node buttons */
+
+.div-main-container {
+    display: table;
+}
+
+.div-add-node {
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 80px;
+    height: 50px;
+    float: left;
+}
+
+.div-add-node button {
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #a9f868;
+    border: solid 1px #643F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.div-prev-problem {
+    margin-top: 10px;
+    margin-right: 60px;
+    width: 80px;
+    height: 50px;
+    float: right;
+}
+
+.div-prev-problem button {
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #a9f868;
+    border: solid 1px #643F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.div-next-problem {
+    margin-top: 10px;
+    margin-right: 40px;
+    width: 80px;
+    height: 50px;
+    float: right;
+}
+
+.div-next-problem button {
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #a9f868;
+    border: solid 1px #643F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}
