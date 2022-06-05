@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hightlight text</title>
+    <style>
+        p::selection {
+            background-color: rgb(23, 197, 84);
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Sample Text</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ex, autem.
+        </p>
+        <!--<input type="button" value="Get Selection" onmousedown="getSelectedText()"> -->
+        <!-- <script>
+            function getSelectedText() {
+                var selectedText = "";
+                // window.getSelection
+                if (window.getSelection) {
+                    selectedText = window.getSelection();
+                }
+                // document.getSelection
+                else if (document.getSelection) {
+                    selectedText = document.getSelection();
+                }
+                // document.selection
+                else if (document.selection) {
+                    selectedText =
+                        document.selection.createRange().text;
+                }
+            }
+        </script> -->
+    </center>
+</body>
+
+</html>

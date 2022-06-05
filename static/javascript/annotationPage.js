@@ -108,12 +108,12 @@ function init() {
     xml.open("POST", "/fetch-dataset", true);
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xml.onload = function () {
+    xml.onload = function() {
         var dataReply = JSON.parse(this.responseText);
 
         // if the local database was not empty, then load it at the frontend
         if (dataReply) {
-            data = JSON.parse(JSON.stringify(dataReply));  // deep copy of the dataset
+            data = JSON.parse(JSON.stringify(dataReply)); // deep copy of the dataset
 
             // format this better using span/header/another p tag
             wordProblemDescription.innerHTML = problemNumber + ') ';
@@ -178,7 +178,7 @@ function saveNodeData(data, callback) {
 }
 
 network.on("doubleClick", () => {
-    console.log("Double ckicled");
+    console.log("Double Clicked");
     network.editNode();
 });
 
