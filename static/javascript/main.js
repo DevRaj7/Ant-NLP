@@ -10,12 +10,12 @@ const panel = document.querySelector('#panel')
 let selectedRating = 'Satisfied'
 
 ratingsContainer.addEventListener('click', (e) => {
-    if(e.target.parentNode.classList.contains('rating')) {
+    if (e.target.parentNode.classList.contains('rating')) {
         removeActive()
         e.target.parentNode.classList.add('active')
         selectedRating = e.target.nextElementSibling.innerHTML
     }
-    if(e.target.classList.contains('rating')) {
+    if (e.target.classList.contains('rating')) {
         removeActive()
         e.target.classList.add('active')
         selectedRating = e.target.nextElementSibling.innerHTML
@@ -34,7 +34,7 @@ sendBtn.addEventListener('click', (e) => {
 })
 
 function removeActive() {
-    for(let i = 0; i < ratings.length; i++) {
+    for (let i = 0; i < ratings.length; i++) {
         ratings[i].classList.remove('active')
     }
 }
@@ -55,10 +55,10 @@ init();
 // The dataset drop area is the part of the page where the user can drop a json file to upload it (or click on the icon/upload button to upload the file)
 const datasetDropArea = document.querySelector('.dataset-drop-area');
 
-const dropAreaHeaderText  = datasetDropArea.querySelector('header');        // controls the header tag in the drop area
-const datasetUploadButton = datasetDropArea.querySelector('button');        // controls the upload button
-const datasetUploadIcon   = datasetDropArea.querySelector('#upload-icon');  // controls the upload icon
-const datasetUploadInput  = datasetDropArea.querySelector('input');         // controls the file input button (which is hidden)
+const dropAreaHeaderText = datasetDropArea.querySelector('header'); // controls the header tag in the drop area
+const datasetUploadButton = datasetDropArea.querySelector('button'); // controls the upload button
+const datasetUploadIcon = datasetDropArea.querySelector('#upload-icon'); // controls the upload icon
+const datasetUploadInput = datasetDropArea.querySelector('input'); // controls the file input button (which is hidden)
 
 const datasetDeleteButton = document.querySelector('.div-delete-dataset button');
 
@@ -69,13 +69,13 @@ var data; // object that holds the dataset
 // the next 2 onclicks check if the user clicks on the upload button or the upload icon, and then trigger the input tag
 datasetUploadButton.onclick = () => {
     // Allow the user to upload a json file only if the existing data object is empty
-    if(Object.keys(data).length === 0) {
+    if (Object.keys(data).length === 0) {
         datasetUploadInput.click();
     }
 }
 
 datasetUploadIcon.onclick = () => {
-    if(Object.keys(data).length === 0) {
+    if (Object.keys(data).length === 0) {
         datasetUploadInput.click();
     }
 }
@@ -113,7 +113,7 @@ datasetDropArea.addEventListener('drop', (event) => {
     console.log("File has been dropped in da");
 
     // fetching the first file dropped
-    if(!file) {
+    if (!file) {
         file = event.dataTransfer.files[0];
         processDataset();
     }
@@ -136,8 +136,8 @@ function fetchDB() {
         var dataReply = JSON.parse(this.responseText);
 
         // if the local database was not empty, then load it at the frontend
-        if(dataReply) {
-            data = JSON.parse(JSON.stringify(dataReply));  // deep copy of the dataset
+        if (dataReply) {
+            data = JSON.parse(JSON.stringify(dataReply)); // deep copy of the dataset
             updateDatasetDisplay();
         }
     };
@@ -152,7 +152,7 @@ function deleteDB() {
 
     xml.onload = function() {
         var dataReply = JSON.parse(this.responseText);
-        data = {} 
+        data = {}
         updateDatasetDisplay();
     };
     xml.send(JSON.stringify({}));
@@ -166,7 +166,7 @@ function sendDB() {
 
     xml.onload = function() {
         var dataReply = JSON.parse(this.responseText);
-        if(dataReply['status'] !== 'success') {
+        if (dataReply['status'] !== 'success') {
             console.log("Error at sendDB");
         }
     };
@@ -183,7 +183,7 @@ function processDataset() {
 
     let fileReader = new FileReader();
     fileReader.onload = () => {
-        if(Object.keys(data).length === 0) {
+        if (Object.keys(data).length === 0) {
             data = fileReader.result;
             data = JSON.parse(data);
             // console.log(data);
@@ -205,16 +205,16 @@ function updateDatasetDisplay() {
 
     let size = Object.keys(data).length;
 
-    for(let i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         // one datapoint
-        let dp = data[ Object.keys(data)[i] ];
+        let dp = data[Object.keys(data)[i]];
         let wordProblem = dp['word_problem'];
         let answer = dp['answer'];
-        
+
         let datapointCard = document.createElement('div');
         datapointCard.classList.add('datapoint-card');
-        datapointCard.setAttribute('id', 'datapoint-card-' + (i+1).toString());
-        datapointCard.innerHTML = (i+1).toString() + ') ' + wordProblem;
+        datapointCard.setAttribute('id', 'datapoint-card-' + (i + 1).toString());
+        datapointCard.innerHTML = (i + 1).toString() + ') ' + wordProblem;
 
         datapointCard.onclick = () => {
             var xml = new XMLHttpRequest();
@@ -223,14 +223,14 @@ function updateDatasetDisplay() {
 
             xml.onload = function() {
                 var dataReply = JSON.parse(this.responseText);
-                if(dataReply['status'] !== 'success') {
+                if (dataReply['status'] !== 'success') {
                     console.log("Error at datapointCard.onclick");
                 }
                 window.open('/annotation-page', '_self');
             };
 
-            console.log({'problemNumber': i+1});
-            let TMP = {'problemNumber': i+1};
+            console.log({ 'problemNumber': i + 1 });
+            let TMP = { 'problemNumber': i + 1 };
 
             // send the problem number to the backend
             xml.send(JSON.stringify(TMP));
@@ -239,4 +239,3 @@ function updateDatasetDisplay() {
         datasetDisplayDiv.appendChild(datapointCard);
     }
 }
-
