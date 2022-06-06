@@ -127,7 +127,7 @@ body {
 
 .div-prev-problem {
     margin-top: 10px;
-    margin-right: 60px;
+    margin-right: 50px;
     width: 80px;
     height: 50px;
     float: right;
@@ -144,7 +144,7 @@ body {
 
 .div-next-problem {
     margin-top: 10px;
-    margin-right: 40px;
+    margin-right: 50px;
     width: 80px;
     height: 50px;
     float: right;
