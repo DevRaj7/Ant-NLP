@@ -10,9 +10,10 @@ def index():
 
 @app.route('/fetch-dataset', methods=['GET', 'POST'])
 def fetchDataset():
-
     dataGet = request.get_json(force=True)
-    data = {}
+    groupNumber = dataGet['groupNumber']
+    dataset = {}
+    totalSize = 0
 
     # If local storage contains a non empty json file, then send that to the frontend
     # Otherwise, send an empty dictionary
@@ -21,8 +22,12 @@ def fetchDataset():
         dbData = json.loads(dbData)
 
         if dbData:
-            data = dbData
+            dataset = dict(zip(list(dbData.keys())[(groupNumber-1)*30:(groupNumber-1) * 30 + 30], list(dbData.values())[(groupNumber-1):(groupNumber) * 30]))
+            totalSize = len(dbData)
+        else:
+            print("Empty Dataset")
 
+    data = {'dataset': dataset, 'totalSize': totalSize}
     dataReply = json.dumps(data)
     print("fetched the dataset")
     return dataReply

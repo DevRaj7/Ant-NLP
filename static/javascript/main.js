@@ -46,6 +46,12 @@ The init function first sends an ajax request to the backend to fetch the datase
 If the dataset is found, then it is loaded in the dataset-display div. The user cannot upload their file if this happens, until the previous dataset is deleted.
 If it is not found, it waits for the user to upload a file, and then loads it.
 */
+var file;
+var data = {}; // object that holds the dataset
+var groupNumber = 1; // group 1 = Word problems from 1 to 30. Group 2 = Word problems from 31 to 60
+var totalSize = 0; // total dataset length
+var numberOfPages = Math.ceil(totalSize / 30); // number of pages/groups
+
 function init() {
     fetchDB();
 }
@@ -62,9 +68,8 @@ const datasetUploadInput = datasetDropArea.querySelector('input'); // controls t
 
 const datasetDeleteButton = document.querySelector('.div-delete-dataset button');
 
-var file;
-var data; // object that holds the dataset
-
+const nextPageButton = document.querySelector('.btn-next-page');
+const previousPageButton = document.querySelector('.btn-previous-page');
 
 // the next 2 onclicks check if the user clicks on the upload button or the upload icon, and then trigger the input tag
 datasetUploadButton.onclick = () => {
@@ -121,9 +126,22 @@ datasetDropArea.addEventListener('drop', (event) => {
 
 datasetDeleteButton.onclick = () => {
     deleteDB();
-    console.log("REC");
     file = null;
     data = {};
+}
+
+nextPageButton.onclick = () => {
+    if (groupNumber < numberOfPages) {
+        groupNumber += 1;
+        fetchDB();
+    }
+}
+
+previousPageButton.onclick = () => {
+    if (groupNumber > 1) {
+        groupNumber -= 1;
+        fetchDB();
+    }
 }
 
 // Fetches the dataset from local storage (if it exists)
@@ -137,11 +155,15 @@ function fetchDB() {
 
         // if the local database was not empty, then load it at the frontend
         if (dataReply) {
-            data = JSON.parse(JSON.stringify(dataReply)); // deep copy of the dataset
+            data = JSON.parse(JSON.stringify(dataReply['dataset'])); // deep copy of the dataset
+            totalSize = dataReply['totalSize'];
+            console.log(totalSize);
+            numberOfPages = Math.ceil(totalSize / 30);
+            document.querySelector('.page-number-display').innerHTML = String(groupNumber) + '/' + String(numberOfPages);
             updateDatasetDisplay();
         }
     };
-    xml.send(JSON.stringify({}));
+    xml.send(JSON.stringify({ 'groupNumber': groupNumber }));
 }
 
 // delete the database at the backend
@@ -215,6 +237,9 @@ function updateDatasetDisplay() {
         datapointCard.classList.add('datapoint-card');
         datapointCard.setAttribute('id', 'datapoint-card-' + (i + 1).toString());
         datapointCard.innerHTML = (i + 1).toString() + ') ' + wordProblem;
+
+        datapointCard.setAttribute('id', 'datapoint-card-' + (i + 1).toString());
+        datapointCard.innerHTML = ((groupNumber - 1) * 30 + i + 1).toString() + ') ' + wordProblem;
 
         datapointCard.onclick = () => {
             var xml = new XMLHttpRequest();

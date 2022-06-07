@@ -1,23 +1,38 @@
-FROM alpine:latest
+FROM ubuntu:22.04
 
-RUN apk add --no-cache python3-dev \
-    && apk add py3-pip \
-    && apk add npm
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
+RUN apt-get install -y python3.10
 
-# RUN apk add sqlite3 libsqlite3-dev 
-RUN mkdir /db
+RUN apt-get install -y mysql-server
+RUN systemctl start mysql.service
 
-RUN adduser -D user
+RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN apt-get install -y python3-pip
 
-WORKDIR /home/user
-COPY . /home/user
-RUN npm install
-USER user
+RUN apt-get install -y npm
 
-ENV PATH="/home/user/.local/bin:${PATH}"
+RUN adduser hostuser
+USER hostuser
+
+WORKDIR /home/hostuser
+COPY . /home/hostuser
+
+ENV PATH="/home/hostuser/.local/bin:${PATH}"
 
 RUN pip install --upgrade pip
 RUN pip --no-cache install -r requirements.txt
+
+USER root
+RUN npm install
+USER hostuser
+
+RUN npm run build
+
+#  default-libmysqlclient-dev build-essential
+# RUN pip install mysqlclient
 
 EXPOSE 5000
 
