@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/Chasmiccoder/Ant-NLP#readme",
   "dependencies": {
-    "node": "^17.7.2",
     "vis-data": "^7.1.4",
     "vis-network": "^9.1.2"
   },
