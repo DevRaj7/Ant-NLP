@@ -263,17 +263,17 @@ function loadNextProblem() {
     xml.send(JSON.stringify({}));
 }
 
-// generate random hex colors
-// function generateRandomHexColor() {
+//generate random hex colors
+function generateRandomHexColor() {
 
-//     var container = document.getElementById("node-popUp");
-//     var colors = random_bg_color();
-//     container.style.backgroundColor = colors;
-// }
+    var container = document.getElementById("node-popUp");
+    var colors = random_bg_color();
+    container.style.backgroundColor = colors;
+}
 
-// function random_bg_color() {
-//     return (
-//         "#" + Math.random().toString(16).slice(2, 8)
-//     );
-// }
-// generateRandomHexColor();
+function random_bg_color() {
+    return (
+        "#" + Math.random().toString(16).slice(2, 8)
+    );
+}
+generateRandomHexColor();
