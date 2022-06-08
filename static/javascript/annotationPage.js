@@ -127,7 +127,6 @@ function init() {
 function graphAddNode() {
     numberOfNodes++;
     var labelTemplate = `State: S${numberOfNodes}\nEntity: 'walnut tree'\nNumber: 4\nUnit: ''\nAttribute: ''\nReference: null`;
-
     nodes.add({
         id: numberOfNodes,
         // label: 'Node ' + numberOfNodes.toString(),
@@ -137,6 +136,9 @@ function graphAddNode() {
         x: -500 + ((numberOfNodes - 1) * nodeMargin),
         y: -120
     });
+    // var container = document.getElementById("div-add-bg-node");
+    // var bgColor = random_bg_color();
+    // container.style.backgroundColor = bgColor;
 }
 
 function editNode(data, cancelAction, callback) {
@@ -172,7 +174,6 @@ function saveNodeData(data, callback) {
     const reference = document.getElementById("node-label-reference").value;
 
     data.label = `State: ${statename}\nEntity: '${entity}'\nNumber: ${number}\nUnit: '${unit}'\nAttribute: '${attribute}'\nReference: ${reference}`;
-
     clearNodePopUp();
     callback(data);
 }
@@ -215,13 +216,14 @@ function loadPrevProblem() {
             data = JSON.parse(JSON.stringify(dataReply)); // deep copy of the dataset
 
             // format this better using span/header/another p tag
-            if (problemNumber > 1) {
-                problemNumber = problemNumber - 1;
+            var rem = problemNumber % 30;
+            if (rem == 1) {
+                problemNumber = problemNumber;
                 wordProblemDescription.innerHTML = problemNumber + ') ';
                 wordProblemDescription.innerHTML += data[problemNumber]['word_problem'];
                 wordProblemDescription.innerHTML += ' Answer: ' + data[problemNumber]['answer'];
             } else {
-                problemNumber = problemNumber;
+                problemNumber = problemNumber - 1;
                 wordProblemDescription.innerHTML = problemNumber + ') ';
                 wordProblemDescription.innerHTML += data[problemNumber]['word_problem'];
                 wordProblemDescription.innerHTML += ' Answer: ' + data[problemNumber]['answer'];
@@ -246,13 +248,14 @@ function loadNextProblem() {
             data = JSON.parse(JSON.stringify(dataReply)); // deep copy of the dataset
 
             // format this better using span/header/another p tag
-            if (problemNumber < 5) {
-                problemNumber = problemNumber + 1;
+            var rem = problemNumber % 30;
+            if (rem == 0) {
+                problemNumber = problemNumber;
                 wordProblemDescription.innerHTML = problemNumber + ') ';
                 wordProblemDescription.innerHTML += data[problemNumber]['word_problem'];
                 wordProblemDescription.innerHTML += ' Answer: ' + data[problemNumber]['answer'];
             } else {
-                problemNumber = problemNumber;
+                problemNumber = problemNumber + 1;
                 wordProblemDescription.innerHTML = problemNumber + ') ';
                 wordProblemDescription.innerHTML += data[problemNumber]['word_problem'];
                 wordProblemDescription.innerHTML += ' Answer: ' + data[problemNumber]['answer'];
@@ -276,4 +279,5 @@ function random_bg_color() {
         "#" + Math.random().toString(16).slice(2, 8)
     );
 }
+
 generateRandomHexColor();
